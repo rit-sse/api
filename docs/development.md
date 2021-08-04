@@ -4,7 +4,7 @@
 ### pipenv
 This project uses [pipenv](https://pipenv.pypa.io/en/latest/) for virtual environment handling. Some useful commands:
 - `pipenv install` - creates a virtual environment if needed and installs all packages
-- `pipenv add <package>` - install a new package
+- `pipenv install <package>` - install a new package
 - `pipenv run <command>` - run the given command inside the virtual environment
 - `pipenv shell` - spawn a shell inside the virtual environment
 #### Installation
