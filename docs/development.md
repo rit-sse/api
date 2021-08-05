@@ -23,3 +23,7 @@ It is reccomended to install black with [pipx](https://pypa.github.io/pipx/).
 To install **pipx**, run `python3 -m pip install --user pipx`. You will then need to append `export PATH="$PATH:$HOME/.local/bin"` to your shell rc file (`~/.bashrc` for bash, `~/.zshrc` for zsh, etc.) and then source your rc file (`source ~/.bashrc`) to be able to run pipx. 
 
 To install **black**, run `pipx install black`. To update black, run `pipx upgrade black`
+
+## Database
+### Flask-SQLAlchemy and Flask-Migrate
+Read [https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database), I'll document it later
