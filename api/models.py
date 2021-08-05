@@ -39,3 +39,17 @@ class Event(db.Model):
 
     def __repr__(self):
         return "<Event {}>".format(self.id)
+
+
+class Membership(db.Model):
+    __tablename__ = "memberships"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), nullable=False)
+    rit_email = db.Column(db.String(32), nullable=False)
+    reason = db.Column(db.Text)
+    given = db.Column(db.DateTime, nullable=False)
+    expires = db.Column(db.DateTime, nullable=False)
+    approved = db.Column(db.Boolean)
+
+    def __repr__(self):
+        return "<Membership {}>".format(self.id)
