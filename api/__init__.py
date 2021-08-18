@@ -10,3 +10,4 @@ migrate = Migrate(app, db)
 
 from api import models
 from api import routes, errors
+from api import commands
