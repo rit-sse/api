@@ -1,5 +1,7 @@
-from api import db
+from dataclasses import dataclass
+from datetime import datetime
 
+from api import db
 
 class GoLink(db.Model):
     __tablename__ = "golinks"
@@ -12,7 +14,18 @@ class GoLink(db.Model):
         return "<GoLink {}>".format(self.short_link)
 
 
+# dataclass usage: https://stackoverflow.com/a/57732785
+@dataclass
 class Officer(db.Model):
+    id: int
+    committee: str
+    rit_dce: str
+    name: str
+    bio: str
+    is_primary: bool
+    start_date: datetime
+    end_date: datetime
+
     __tablename__ = "officers"
     id = db.Column(db.Integer, primary_key=True)
     committee = db.Column(db.String(64), nullable=False)
@@ -25,6 +38,10 @@ class Officer(db.Model):
 
     def __repr__(self):
         return "<Officer {}>".format(self.id)
+
+    @classmethod
+    def get_active(cls):
+        return cls.query.filter(cls.start_date < datetime.now(), cls.end_date > datetime.now()).all()
 
 
 class Membership(db.Model):
