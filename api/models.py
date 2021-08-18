@@ -27,20 +27,6 @@ class Officer(db.Model):
         return "<Officer {}>".format(self.id)
 
 
-class Event(db.Model):
-    __tablename__ = "events"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    committee = db.Column(db.String(64), nullable=False)
-    description = db.Column(db.Text)
-    location = db.Column(db.Text)
-    start_date = db.Column(db.DateTime, nullable=False)
-    end_date = db.Column(db.DateTime, nullable=False)
-
-    def __repr__(self):
-        return "<Event {}>".format(self.id)
-
-
 class Membership(db.Model):
     __tablename__ = "memberships"
     id = db.Column(db.Integer, primary_key=True)
