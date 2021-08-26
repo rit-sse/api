@@ -9,7 +9,8 @@ from api import models
 def command_create_officer():
     dce = input("Please enter the officer's RIT DCE (abc1234): ")
     name = input("Please enter the officer's name (John Smith): ")
-    committee = input("Please enter the officer's committe (tech): ")
+    committee = input("Please name the officer's committe (technology): ")
+    email = input("Please name the officer's email (technology): ")
     is_primary_str = input("Is the user a primary? [y/N]: ")
     is_primary = is_primary_str == "y" or is_primary_str == "Y"
     start_str = input(
@@ -29,6 +30,11 @@ def command_create_officer():
             "RIT DCE should only be the first part of the officer's email, ie abc1234"
         )
         exit()
+    if "@" in email:
+        print(
+            "email should ony be first part of the sse email, ie technology"
+        )
+        exit()
 
     officer = models.Officer(
         rit_dce=dce,
@@ -37,6 +43,7 @@ def command_create_officer():
         is_primary=is_primary,
         start_date=start_date,
         end_date=end_date,
+        email=email,
     )
     db.session.add(officer)
     db.session.commit()
