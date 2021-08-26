@@ -52,7 +52,7 @@ class Officer(db.Model):
         )
 
     @classmethod
-    def is_primary(cls, dce: str):
+    def is_primary_officer(cls, dce: str):
         return (
             len(
                 cls.query.filter(
