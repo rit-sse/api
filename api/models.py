@@ -22,6 +22,7 @@ class Officer(db.Model):
     id: int = db.Column(db.Integer, primary_key=True)
     committee: str = db.Column(db.String(64), nullable=False)
     rit_dce: str = db.Column(db.String(32), nullable=False)
+    email: str = db.Column(db.String(128), nullable=False)
     name: str = db.Column(db.String(128), nullable=False)
     bio: str = db.Column(db.Text)
     is_primary: bool = db.Column(db.Boolean)
@@ -45,6 +46,20 @@ class Officer(db.Model):
                     cls.start_date < datetime.now(), cls.end_date > datetime.now()
                 )
                 .filter(cls.rit_dce == dce)
+                .all()
+            )
+            > 0
+        )
+
+    @classmethod
+    def is_primary(cls, dce: str):
+        return (
+            len(
+                cls.query.filter(
+                    cls.start_date < datetime.now(), cls.end_date > datetime.now()
+                )
+                .filter(cls.rit_dce == dce)
+                .filter(cls.is_primary == True)
                 .all()
             )
             > 0
