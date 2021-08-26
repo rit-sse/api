@@ -13,3 +13,6 @@ class Config(object):
         "DATABASE_URL"
     ) or "sqlite:///" + os.path.join(dirname(__file__), "app.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+    GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")

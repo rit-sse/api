@@ -1,1 +1,1 @@
-from api.routes import status, officers
+from api.routes import status, officers, auth

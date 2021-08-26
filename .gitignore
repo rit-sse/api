@@ -154,3 +154,6 @@ Thumbs.db
 
 # databases
 *.db
+
+# env
+.env

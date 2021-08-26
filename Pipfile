@@ -9,6 +9,9 @@ gunicorn = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+flask-oauth = "*"
+authlib = "*"
+requests = "*"
 
 [dev-packages]
 

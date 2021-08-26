@@ -3,6 +3,7 @@ from datetime import datetime
 
 from api import db
 
+
 class GoLink(db.Model):
     __tablename__ = "golinks"
     short_link = db.Column(db.String(64), primary_key=True)
@@ -32,7 +33,9 @@ class Officer(db.Model):
 
     @classmethod
     def get_active(cls):
-        return cls.query.filter(cls.start_date < datetime.now(), cls.end_date > datetime.now()).all()
+        return cls.query.filter(
+            cls.start_date < datetime.now(), cls.end_date > datetime.now()
+        ).all()
 
 
 class Membership(db.Model):
