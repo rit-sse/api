@@ -37,6 +37,19 @@ class Officer(db.Model):
             cls.start_date < datetime.now(), cls.end_date > datetime.now()
         ).all()
 
+    @classmethod
+    def is_officer(cls, dce: str):
+        return (
+            len(
+                cls.query.filter(
+                    cls.start_date < datetime.now(), cls.end_date > datetime.now()
+                )
+                .filter(cls.rit_dce == dce)
+                .all()
+            )
+            > 0
+        )
+
 
 class Membership(db.Model):
     __tablename__ = "memberships"

@@ -1,6 +1,7 @@
 from flask import session, redirect, url_for
 from flask.json import jsonify
 from api import app, oauth
+from api import models
 
 
 @app.route("/api/v2/login")
@@ -26,6 +27,14 @@ def _get_api_v2_logout():
 @app.route("/api/v2/whoami")
 def _get_api_v2_whoami():
     try:
-        return jsonify(session["user"])
+        return jsonify(
+            {
+                "google": session["user"],
+                "officer": models.Officer.is_officer(
+                    session["user"]["email"].split("@")[0]
+                ),
+                "rit_student": session["user"]["email"].split("@")[1] == "g.rit.edu",
+            }
+        )
     except:
         return jsonify({"error": "not logged in"})
