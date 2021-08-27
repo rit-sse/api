@@ -10,3 +10,8 @@ def _error_400(error):
 @app.errorhandler(404)
 def _error_404(error):
     return jsonify({"error": "not found"}), 404
+
+
+@app.errorhandler(405)
+def _error_405(error):
+    return jsonify({"error": "method not allowed"}), 405
