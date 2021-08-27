@@ -33,7 +33,7 @@ def _get_api_v2_whoami():
                 "officer": models.Officer.is_officer(
                     session["user"]["email"].split("@")[0]
                 ),
-                "primary": models.Officer.is_primary(
+                "primary": models.Officer.is_primary_officer(
                     session["user"]["email"].split("@")[0]
                 ),
                 "rit_student": session["user"]["email"].split("@")[1] == "g.rit.edu",
