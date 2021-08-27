@@ -29,6 +29,9 @@ def _post_api_v2_officers():
         raise Exception("dce does not match required format")
 
     # TODO: there's a better way to do this
+    # TODO: the time check here has to be fixed. currently it prevents adding an officer
+    # if they're currently active, but it should check that the new start date isn't 
+    # before the existing officer's end date
     current_officers: List[Officer] = Officer.get_active()
     for officer in current_officers:
         if officer.rit_dce == o.rit_dce:
