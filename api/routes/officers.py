@@ -3,6 +3,7 @@ from datetime import datetime
 from api import app, db
 from api.models import Officer
 from flask import jsonify, request, session
+from typing import List
 
 
 @app.route("/api/v2/officers", methods=["GET"])
@@ -26,6 +27,12 @@ def _post_api_v2_officers():
     dce_regex = re.compile("^[a-z]{2,3}[0-9]{4}$")
     if not dce_regex.match(o.rit_dce):
         raise Exception("dce does not match required format")
+
+    # TODO: there's a better way to do this
+    current_officers: List[Officer] = Officer.get_active()
+    for officer in current_officers:
+        if officer.rit_dce == o.rit_dce:
+            return jsonify({"error": "an officer with that DCE already exists"}), 400
 
     db.session.add(o)
     db.session.commit()

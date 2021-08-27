@@ -72,7 +72,6 @@ class Officer(db.Model):
         )
 
 
-
 class Membership(db.Model):
     __tablename__ = "memberships"
     id = db.Column(db.Integer, primary_key=True)

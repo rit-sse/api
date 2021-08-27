@@ -32,12 +32,8 @@ def _get_api_v2_whoami():
     return jsonify(
         {
             "google": session["user"],
-            "officer": models.Officer.is_officer(
-                session["user"]["email"]
-            ),
-            "primary": models.Officer.is_primary_officer(
-                session["user"]["email"]
-            ),
+            "officer": models.Officer.is_officer(session["user"]["email"]),
+            "primary": models.Officer.is_primary_officer(session["user"]["email"]),
             "rit_student": session["user"]["email"].split("@")[1] == "g.rit.edu",
         }
     )
