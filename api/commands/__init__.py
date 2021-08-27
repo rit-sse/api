@@ -31,9 +31,7 @@ def command_create_officer():
         )
         exit()
     if "@" in email:
-        print(
-            "email should ony be first part of the sse email, ie technology"
-        )
+        print("email should ony be first part of the sse email, ie technology")
         exit()
 
     officer = models.Officer(
