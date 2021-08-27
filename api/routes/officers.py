@@ -3,7 +3,7 @@ from datetime import datetime
 from api import app, db
 from api.models import Officer
 from flask import jsonify, request, session
-from typing import List
+from typing import AnyStr, List, Pattern
 
 
 @app.route("/api/v2/officers", methods=["GET"])
@@ -24,7 +24,7 @@ def _post_api_v2_officers():
     o.end_date = datetime.strptime(o.end_date, "%Y-%m-%dT%H:%M:%S.%fZ")
 
     # TODO: More validation
-    dce_regex = re.compile("^[a-z]{2,3}[0-9]{4}$")
+    dce_regex: Pattern[AnyStr@compile] = re.compile("^[a-z]{2,3}[0-9]{4}$")
     if not dce_regex.match(o.rit_dce):
         raise Exception("dce does not match required format")
 
