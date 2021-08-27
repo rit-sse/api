@@ -18,5 +18,5 @@ oauth.register(
 )
 
 from api import models
-from api import routes, errors
 from api import commands
+from api import routes, errors
