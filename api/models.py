@@ -39,7 +39,10 @@ class Officer(db.Model):
         ).all()
 
     @classmethod
-    def is_officer(cls, dce: str):
+    def is_officer(cls, email: str) -> bool:
+        if email.split("@")[1] != "g.rit.edu":
+            return False
+        dce = email.split("@")[0]
         return (
             len(
                 cls.query.filter(
@@ -52,7 +55,10 @@ class Officer(db.Model):
         )
 
     @classmethod
-    def is_primary_officer(cls, dce: str):
+    def is_primary_officer(cls, email: str):
+        if email.split("@")[1] != "g.rit.edu":
+            return False
+        dce = email.split("@")[0]
         return (
             len(
                 cls.query.filter(
@@ -64,6 +70,7 @@ class Officer(db.Model):
             )
             > 0
         )
+
 
 
 class Membership(db.Model):

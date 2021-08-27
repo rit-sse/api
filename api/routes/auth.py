@@ -26,18 +26,18 @@ def _get_api_v2_logout():
 
 @app.route("/api/v2/whoami")
 def _get_api_v2_whoami():
-    try:
-        return jsonify(
-            {
-                "google": session["user"],
-                "officer": models.Officer.is_officer(
-                    session["user"]["email"].split("@")[0]
-                ),
-                "primary": models.Officer.is_primary_officer(
-                    session["user"]["email"].split("@")[0]
-                ),
-                "rit_student": session["user"]["email"].split("@")[1] == "g.rit.edu",
-            }
-        )
-    except:
+    if not "user" in session:
         return jsonify({"error": "not logged in"})
+
+    return jsonify(
+        {
+            "google": session["user"],
+            "officer": models.Officer.is_officer(
+                session["user"]["email"]
+            ),
+            "primary": models.Officer.is_primary_officer(
+                session["user"]["email"]
+            ),
+            "rit_student": session["user"]["email"].split("@")[1] == "g.rit.edu",
+        }
+    )

@@ -14,7 +14,7 @@ def _get_api_v2_officers():
 def _post_api_v2_officers():
     if not "user" in session:
         return jsonify({"error": "not logged in"}), 401
-    if not Officer.is_primary_officer(session["user"]["email"].split("@")[0]):
+    if not Officer.is_primary_officer(session["user"]["email"]):
         return jsonify({"error": "not a primary officer"}), 401
 
     o: Officer = Officer(**request.json)
