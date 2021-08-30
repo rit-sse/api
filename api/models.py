@@ -94,5 +94,15 @@ class Membership(db.Model):
     @classmethod
     def get_active(cls):
         return cls.query.filter(
-            cls.start_date < datetime.now(), cls.end_date > datetime.now()
+            cls.given < datetime.now(), cls.expires > datetime.now()
+        ).filter(
+            cls.approved == True
+        ).all()
+
+    @classmethod
+    def get_unnaproved(cls):
+        return cls.query.filter(
+            cls.given < datetime.now(), cls.expires > datetime.now()
+        ).filter(
+            cls.approved == False
         ).all()
