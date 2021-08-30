@@ -10,6 +10,12 @@ from typing import AnyStr, List, Pattern
 def _get_api_v2_officers():
     return jsonify(Officer.get_active())
 
+@app.route("/api/v2/officers/<int:id>", methods=["GET"])
+def _get_api_v2_officers_id(id: int):
+    officer = Officer.get_by_id(id)
+    if officer == None:
+        return jsonify({"error": "officer not found"}), 404
+    return jsonify(officer)
 
 @app.route("/api/v2/officers", methods=["POST"])
 def _post_api_v2_officers():

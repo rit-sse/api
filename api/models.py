@@ -33,6 +33,10 @@ class Officer(db.Model):
         return "<Officer {}>".format(self.id)
 
     @classmethod
+    def get_by_id(cls, id: int):
+        return cls.query.filter(cls.id == id).first()
+
+    @classmethod
     def get_active(cls):
         return cls.query.filter(
             cls.start_date < datetime.now(), cls.end_date > datetime.now()
