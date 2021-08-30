@@ -15,6 +15,6 @@ def _get_api_v2_memberships_unnaproved():
     if not "user" in session:
         return jsonify({"error": "not logged in"}), 401
     if not Officer.is_primary_officer(session["user"]["email"]):
-        return jsonify({"error": "not a primary officer"}), 401
+        return jsonify({"error": "not a primary officer"}), 403
 
     return jsonify(Membership.get_unnaproved())
