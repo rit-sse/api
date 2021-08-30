@@ -10,12 +10,14 @@ from typing import AnyStr, List, Pattern
 def _get_api_v2_officers():
     return jsonify(Officer.get_active())
 
+
 @app.route("/api/v2/officers/<int:id>", methods=["GET"])
 def _get_api_v2_officers_id(id: int):
     officer = Officer.get_by_id(id)
     if officer == None:
         return jsonify({"error": "officer not found"}), 404
     return jsonify(officer)
+
 
 @app.route("/api/v2/officers", methods=["POST"])
 def _post_api_v2_officers():
@@ -30,7 +32,7 @@ def _post_api_v2_officers():
     o.end_date = datetime.strptime(o.end_date, "%Y-%m-%dT%H:%M:%S.%fZ")
 
     # TODO: More validation
-    dce_regex: Pattern[AnyStr@compile] = re.compile("^[a-z]{2,3}[0-9]{4}$")
+    dce_regex: Pattern[AnyStr @ compile] = re.compile("^[a-z]{2,3}[0-9]{4}$")
     if not dce_regex.match(o.rit_dce):
         raise Exception("dce does not match required format")
 
@@ -46,6 +48,7 @@ def _post_api_v2_officers():
     db.session.add(o)
     db.session.commit()
     return jsonify(o)
+
 
 @app.route("/api/v2/officers/<int:id>", methods=["DELETE"])
 def _delete_api_v2_officers_id(id: int):

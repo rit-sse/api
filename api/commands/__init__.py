@@ -1,1 +1,1 @@
-from api.commands import officers
+from api.commands import officers, memberships

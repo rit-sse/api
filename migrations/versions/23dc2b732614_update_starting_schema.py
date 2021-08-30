@@ -1,8 +1,8 @@
-"""simplify flask db upgrade
+"""update starting schema
 
-Revision ID: d11a8cee1784
+Revision ID: 23dc2b732614
 Revises: 
-Create Date: 2021-08-26 17:40:28.964823
+Create Date: 2021-08-30 16:57:21.560517
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = "d11a8cee1784"
+revision = "23dc2b732614"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,8 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=128), nullable=False),
         sa.Column("rit_dce", sa.String(length=32), nullable=False),
-        sa.Column("reason", sa.Text(), nullable=True),
+        sa.Column("reason", sa.String(length=256), nullable=False),
+        sa.Column("given_by", sa.String(length=32), nullable=False),
         sa.Column("given", sa.DateTime(), nullable=False),
         sa.Column("expires", sa.DateTime(), nullable=False),
         sa.Column("approved", sa.Boolean(), nullable=True),

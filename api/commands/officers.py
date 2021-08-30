@@ -4,6 +4,7 @@ from time import mktime, strptime
 from api import app, db
 from api import models
 
+
 @app.cli.command("create-officer")
 def command_create_officer():
     dce = input("Please enter the officer's RIT DCE (abc1234): ")

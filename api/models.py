@@ -76,15 +76,23 @@ class Officer(db.Model):
         )
 
 
+@dataclass
 class Membership(db.Model):
     __tablename__ = "memberships"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), nullable=False)
-    rit_dce = db.Column(db.String(32), nullable=False)
-    reason = db.Column(db.Text)
-    given = db.Column(db.DateTime, nullable=False)
-    expires = db.Column(db.DateTime, nullable=False)
-    approved = db.Column(db.Boolean)
+    id: int = db.Column(db.Integer, primary_key=True)
+    name: str = db.Column(db.String(128), nullable=False)
+    rit_dce: str = db.Column(db.String(32), nullable=False)
+    reason: str = db.Column(db.String(256), nullable=False)
+    given_by: str = db.Column(db.String(32), nullable=False)
+    given: datetime = db.Column(db.DateTime, nullable=False)
+    expires: datetime = db.Column(db.DateTime, nullable=False)
+    approved: bool = db.Column(db.Boolean)
 
     def __repr__(self):
         return "<Membership {}>".format(self.id)
+
+    @classmethod
+    def get_active(cls):
+        return cls.query.filter(
+            cls.start_date < datetime.now(), cls.end_date > datetime.now()
+        ).all()
