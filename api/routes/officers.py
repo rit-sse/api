@@ -36,7 +36,7 @@ def _post_api_v2_officers():
 
     # TODO: there's a better way to do this
     # TODO: the time check here has to be fixed. currently it prevents adding an officer
-    # if they're currently active, but it should check that the new start date isn't 
+    # if they're currently active, but it should check that the new start date isn't
     # before the existing officer's end date
     current_officers: List[Officer] = Officer.get_active()
     for officer in current_officers:
@@ -45,5 +45,20 @@ def _post_api_v2_officers():
 
     db.session.add(o)
     db.session.commit()
-
     return jsonify(o)
+
+@app.route("/api/v2/officers/<int:id>", methods=["DELETE"])
+def _delete_api_v2_officers_id(id: int):
+    if not "user" in session:
+        return jsonify({"error": "not logged in"}), 401
+    if not Officer.is_primary_officer(session["user"]["email"]):
+        return jsonify({"error": "not a primary officer"}), 401
+
+    officer = Officer.get_by_id(id)
+    if officer == None:
+        return jsonify({"error": "officer not found"}), 404
+
+    db.session.delete(officer)
+    db.session.commit()
+
+    return "", 204
