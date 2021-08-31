@@ -1,11 +1,11 @@
-FROM python:3.7-slim-buster AS requirements
+FROM python:3.9-slim-buster AS requirements
 WORKDIR /opt/api/
 
 RUN pip install pipenv
 ADD Pipfile Pipfile.lock /opt/api/
 RUN pipenv install && pipenv run pip freeze > requirements.txt
 
-FROM python:3.7-slim-buster
+FROM python:3.9-slim-buster
 LABEL maintainer="RIT SSE <tech@sse.rit.edu>"
 
 RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime && \
